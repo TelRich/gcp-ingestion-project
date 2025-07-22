@@ -22,3 +22,9 @@ resource "google_storage_bucket" "raw_data_bucket" {
 
     uniform_bucket_level_access = true
 }
+
+resource "google_bigquery_dataset" "sales_dataset" {
+    dataset_id = var.dataset_id
+    location = var.region
+    description = "Dataset for storing uploaded sales data"
+}
