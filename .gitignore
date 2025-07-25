@@ -27,3 +27,4 @@ terraform.tfvars
 #  - *.tf          (your main.tf, variables.tf, outputs.tf, etc.)
 #  - .terraform.lock.hcl
 #  - README.md / examples (e.g. terraform.tfvars.example)
+terraform/terraform.tfstate.1753424207.backup

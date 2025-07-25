@@ -27,4 +27,7 @@ resource "google_bigquery_dataset" "sales_dataset" {
     dataset_id = var.dataset_id
     location = var.region
     description = "Dataset for storing uploaded sales data"
+        
+    # Disable Terraform from trying to manage this optional value
+    default_table_expiration_ms = null
 }

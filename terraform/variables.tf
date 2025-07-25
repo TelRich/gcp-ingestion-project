@@ -5,7 +5,7 @@ variable "project_id" {
 
 variable "region" {
     type = string
-    default = "us-central"
+    default = "us-central1"
     description = "GCP region"
 }
 
@@ -22,5 +22,4 @@ variable "dataset_id" {
 variable "gcp_credentials_file" {
     type = string
     description = "Path to your GCP credentials JSON file"
-    default = "C:/Users/okoro/AppData/Local/Google/Cloud SDK/key.json"
 }
