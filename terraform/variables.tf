@@ -18,3 +18,9 @@ variable "dataset_id" {
     type = string
     description = "BigQuery dataset ID"
 }
+
+variable "gcp_credentials_file" {
+    type = string
+    description = "Path to your GCP credentials JSON file"
+    default = "C:/Users/okoro/AppData/Local/Google/Cloud SDK/key.json"
+}
