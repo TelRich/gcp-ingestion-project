@@ -97,7 +97,7 @@ zip -r ../cloud_function.zip main.py requirements.txt
 cd ..
 
 # 4. Deploy with Terraform
-cd terraform
+dd terraform
 terraform init
 terraform apply -auto-approve
 
@@ -155,12 +155,20 @@ The included `test_sales.csv` contains:
 * **BigQuery Data**: Console > BigQuery > your-dataset > sales
 * **Storage Activity**: Console > Cloud Storage > your-bucket
 
-## Cost Estimate
+## Cost Estimate & Considerations
 
-* Cloud Storage: \~\$1-3/month
-* Cloud Functions: \~\$0-2/month
-* BigQuery: \~\$2-5/month
-* **Total**: \~\$5-10/month
+**Monthly Estimates (free-tier plus minimal usage):**
+
+| Component        | Estimated Cost              | Notes                                |
+| ---------------- | --------------------------- | ------------------------------------ |
+| Cloud Storage    | \$0 (up to 5 GB)            | Always-free quota covers small CSVs  |
+| Cloud Functions  | \$0 (up to 2 M invocations) | Free tier sufficient for development |
+| BigQuery Storage | \$0 (up to 10 GB)           | Free tier covers dataset storage     |
+| BigQuery Queries | \$0 (up to 1 TB/month)      | Includes model training via BQ ML    |
+| Looker Studio    | Free                        | No license fee                       |
+| **Total**        | **\$0–\$3**                 | Occasional egress or extra storage   |
+
+> **Tip:** Enable **Budget Alerts** in the Billing console to notify you when spending approaches free-tier limits.
 
 ## Cleanup
 
