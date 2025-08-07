@@ -66,7 +66,7 @@ Before deploying this project, ensure you have:
 ### 1. Clone and Configure
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/TelRich/gcp-ingestion-project.git
 cd gcp-ingestion-project
 ```
 
