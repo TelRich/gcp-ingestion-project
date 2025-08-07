@@ -2,8 +2,7 @@
 
 An automated data ingestion pipeline that processes CSV files uploaded to Google Cloud Storage, loads them into BigQuery, and visualizes the data using Google Looker. The entire infrastructure is managed with Terraform for infrastructure as code.
 
-![Architecture Diagram](images/architecture-diagram.png)
-![](2025-08-07-08-51-49.png)
+![Architecture Diagram](images/architecture-diagram.svg)
 *End-to-end data pipeline architecture*
 
 ## Architecture Overview
