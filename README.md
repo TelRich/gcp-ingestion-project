@@ -6,11 +6,11 @@ Automated data pipeline that processes CSV files uploaded to Google Cloud Storag
 
 ## Architecture
 
-- **Cloud Storage**: File upload triggers
-- **Cloud Functions**: Processes CSV and loads to BigQuery
-- **BigQuery**: Data warehouse for analytics
-- **Google Looker**: Data visualization
-- **Terraform**: Infrastructure management
+* **Cloud Storage**: File upload triggers
+* **Cloud Functions**: Processes CSV and loads to BigQuery
+* **BigQuery**: Data warehouse for analytics
+* **Google Looker**: Data visualization
+* **Terraform**: Infrastructure management
 
 ## Project Structure
 
@@ -31,28 +31,33 @@ gcp-ingestion-project/
 ## Prerequisites
 
 1. Google Cloud Project with APIs enabled:
-   - Cloud Storage API
-   - Cloud Functions API
-   - BigQuery API
+
+   * Cloud Storage API
+   * Cloud Functions API
+   * BigQuery API
 
 2. Service Account with roles:
-   - Storage Admin
-   - BigQuery Admin
-   - Cloud Functions Admin
+
+   * Storage Admin
+   * BigQuery Admin
+   * Cloud Functions Admin
 
 3. Tools:
-   - [Terraform](https://terraform.io/downloads) (>= 1.3.0)
-   - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
+
+   * [Terraform](https://terraform.io/downloads) (>= 1.3.0)
+   * [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
 ## Quick Setup
 
 1. **Configure variables**:
+
    ```bash
    cp terraform/terraform.tfvars.example terraform/terraform.tfvars
    # Edit terraform.tfvars with your project details
    ```
 
 2. **Prepare Cloud Function**:
+
    ```bash
    cd cloud_function
    zip -r ../cloud_function.zip main.py requirements.txt
@@ -60,6 +65,7 @@ gcp-ingestion-project/
    ```
 
 3. **Deploy infrastructure**:
+
    ```bash
    cd terraform
    terraform init
@@ -67,9 +73,43 @@ gcp-ingestion-project/
    ```
 
 4. **Test the pipeline**:
+
    ```bash
    gsutil cp test_sales.csv gs://your-bucket-name/
    ```
+
+## Clone and Run Locally
+
+To get started from a fresh environment, follow these steps after cloning the repository:
+
+```bash
+# 1. Clone the repo (replace URL with your own)
+git clone https://github.com/<your-org>/gcp-ingestion-project.git
+cd gcp-ingestion-project
+
+# 2. Copy and edit Terraform variables
+cp terraform/terraform.tfvars.example terraform/terraform.tfvars
+# Open terraform/terraform.tfvars and set project_id, bucket_name, dataset_id, etc.
+
+# 3. Package the Cloud Function
+cd cloud_function
+zip -r ../cloud_function.zip main.py requirements.txt
+cd ..
+
+# 4. Deploy with Terraform
+cd terraform
+terraform init
+terraform apply -auto-approve
+
+# 5. Verify the pipeline
+# Upload a sample file and watch it load into BigQuery
+gsutil cp ../test_sales.csv gs://$(terraform output -raw bucket_url | sed 's|gs://||;s|/||')
+
+# 6. Query data in BigQuery
+bq query --use_legacy_sql=false 'SELECT * FROM `'"$PROJECT_ID"'.'"$dataset_id"'.sales` LIMIT 10;'
+```
+
+> Replace `<your-org>` and `<your-repo>` with your actual GitHub organization and repository name as needed.
 
 ## How It Works
 
@@ -83,10 +123,11 @@ gcp-ingestion-project/
 ## Data Visualization with Looker
 
 Create interactive dashboards with metrics like:
-- Daily sales trends
-- Performance by salesperson
-- Revenue analysis
-- Sales forecasting
+
+* Daily sales trends
+* Performance by salesperson
+* Revenue analysis
+* Sales forecasting
 
 ## Configuration
 
@@ -102,23 +143,24 @@ gcp_credentials_file = "path/to/service-account.json"
 ## Sample Data
 
 The included `test_sales.csv` contains:
-- 1,295+ sales records
-- Date range: July 2025 - January 2026  
-- 7 salespeople (Alice, Bob, Carol, Dave, Eve, Frank, Grace)
-- Transaction amounts: $100-999
+
+* 1,295+ sales records
+* Date range: July 2025 - January 2026
+* 7 salespeople (Alice, Bob, Carol, Dave, Eve, Frank, Grace)
+* Transaction amounts: \$100-999
 
 ## Monitoring
 
-- **Function Logs**: Cloud Console > Cloud Functions > Logs
-- **BigQuery Data**: Console > BigQuery > your-dataset > sales
-- **Storage Activity**: Console > Cloud Storage > your-bucket
+* **Function Logs**: Cloud Console > Cloud Functions > Logs
+* **BigQuery Data**: Console > BigQuery > your-dataset > sales
+* **Storage Activity**: Console > Cloud Storage > your-bucket
 
 ## Cost Estimate
 
-- Cloud Storage: ~$1-3/month
-- Cloud Functions: ~$0-2/month  
-- BigQuery: ~$2-5/month
-- **Total**: ~$5-10/month
+* Cloud Storage: \~\$1-3/month
+* Cloud Functions: \~\$0-2/month
+* BigQuery: \~\$2-5/month
+* **Total**: \~\$5-10/month
 
 ## Cleanup
 
@@ -126,7 +168,7 @@ To destroy all resources:
 
 ```bash
 cd terraform
-terraform destroy
+terraform destroy -auto-approve
 ```
 
 ## License
