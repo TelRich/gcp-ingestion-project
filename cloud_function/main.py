@@ -24,7 +24,7 @@ def load_csv_to_bq(event, context):
         write_disposition="WRITE_APPEND"
     )
     
-    load_job = client.load_table_fom_url(
+    load_job = client.load_table_from_uri(
         uri, table_id, job_config=job_config
     )
     
