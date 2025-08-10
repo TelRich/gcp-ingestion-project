@@ -84,7 +84,7 @@ To get started from a fresh environment, follow these steps after cloning the re
 
 ```bash
 # 1. Clone the repo (replace URL with your own)
-git clone https://github.com/<your-org>/gcp-ingestion-project.git
+git clone https://github.com/TelRich/gcp-ingestion-project.git
 cd gcp-ingestion-project
 
 # 2. Copy and edit Terraform variables
