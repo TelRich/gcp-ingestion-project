@@ -83,7 +83,7 @@ gcp-ingestion-project/
 To get started from a fresh environment, follow these steps after cloning the repository:
 
 ```bash
-# 1. Clone the repo (replace URL with your own)
+# 1. Clone the repo
 git clone https://github.com/TelRich/gcp-ingestion-project.git
 cd gcp-ingestion-project
 
@@ -109,7 +109,6 @@ gsutil cp ../test_sales.csv gs://$(terraform output -raw bucket_url | sed 's|gs:
 bq query --use_legacy_sql=false 'SELECT * FROM `'"$PROJECT_ID"'.'"$dataset_id"'.sales` LIMIT 10;'
 ```
 
-> Replace `<your-org>` and `<your-repo>` with your actual GitHub organization and repository name as needed.
 
 ## How It Works
 
